@@ -28,8 +28,8 @@ public class HomeController {
     @Autowired
     private JobRepository jobRepository;
 
-//    @Autowired
-//    private SkillRepository skillRepository;
+    @Autowired
+    private SkillRepository skillRepository;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -69,20 +69,48 @@ public class HomeController {
 //        return "redirect:";
 //    }
 
-    @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                    Errors errors, Model model,
-                                    @RequestParam Integer employerId) {
+//    @PostMapping("add")
+//    public String processAddJobForm(@ModelAttribute @Valid Job newJob,
+//                                    Errors errors, Model model,
+//                                    @RequestParam Integer employerId) {
+//
+//        if (errors.hasErrors()) {
+//            model.addAttribute("title", "Add Job");
+//            return "add";
+//        }
+//        Employer employer = newJob.getEmployer();
+//        newJob.setEmployer(employer);
+////        newJob.add(employerId);
+//        jobRepository.save(newJob);
+//        return "redirect:";
+//    }
 
+    @PostMapping("add")
+    public String processAddJobForm(@ModelAttribute @Valid Job newJob, Errors errors, Model model, @RequestParam Integer employerId) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-        Employer employer = newJob.getEmployer();
-        newJob.setEmployer(employer);
-//        newJob.add(employerId);
-        jobRepository.save(newJob);
-        return "redirect:";
+
+        // Retrieve the selected employer from the employerRepository
+        Optional<Employer> optionalEmployer = employerRepository.findById(employerId);
+
+        if (optionalEmployer.isPresent()) {
+            Employer selectedEmployer = optionalEmployer.get();
+
+            // Set the selected employer in the newJob
+            newJob.setEmployer(selectedEmployer);
+
+            // Save the job to the database
+            jobRepository.save(newJob);
+
+            return "redirect:/";
+        } else {
+            // Handle the case where the selected employer doesn't exist
+            model.addAttribute("title", "Add Job");
+            model.addAttribute("errorMessage", "Selected employer does not exist.");
+            return "add";
+        }
     }
 
 
