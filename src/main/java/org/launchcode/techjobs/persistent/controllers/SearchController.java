@@ -24,11 +24,11 @@ public class SearchController {
     @Autowired
     private JobRepository jobRepository;
 
-//    @Autowired
-//    private SkillRepository skillRepository;
-//
-//    @Autowired
-//    private EmployerRepository employerRepository;
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
+    private EmployerRepository employerRepository;
 
     @RequestMapping("")
     public String search(Model model) {

@@ -21,6 +21,7 @@ public class Employer extends AbstractEntity {
 //    }
     @OneToMany
     @JoinColumn(name = "employer_id")
+//    @OneToMany(mappedBy = "employer")
     private final List<Job> jobs = new ArrayList<>();
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -40,4 +41,11 @@ public class Employer extends AbstractEntity {
     public List<Job> getJobs() {
         return jobs;
     }
+
+//    @Override
+//    public String toString() {
+//        return name;
+//    }
+
+
 }
