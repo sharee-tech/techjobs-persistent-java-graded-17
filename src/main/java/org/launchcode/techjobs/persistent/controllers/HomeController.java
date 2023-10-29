@@ -192,8 +192,9 @@ public String processAddJobForm(@ModelAttribute @Valid Job newJob, Errors errors
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
-
-            return "view";
+        Job job = jobRepository.findById(jobId).get();
+        model.addAttribute("job", job);
+        return "view";
     }
 
 
