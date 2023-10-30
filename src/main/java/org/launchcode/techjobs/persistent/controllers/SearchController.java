@@ -1,8 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Job;
-import org.launchcode.techjobs.persistent.models.Skill;
-import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.JobData;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
@@ -33,13 +31,6 @@ public class SearchController {
     @RequestMapping("")
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
-
-//        Iterable<Skill> skills = skillRepository.findAll();
-//        Iterable<Employer> employers = employerRepository.findAll();
-//
-//        model.addAttribute("skills", skills);
-//        model.addAttribute("employers", employers);
-
         return "search";
     }
 
@@ -55,7 +46,6 @@ public class SearchController {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("jobs", jobs);
-
 
         return "search";
     }

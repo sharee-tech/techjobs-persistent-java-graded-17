@@ -15,18 +15,10 @@ public class Employer extends AbstractEntity {
     @Size(min = 3, max = 50, message = "Location must be between 3 and 50 characters")
     private String location;
 
-//    public Employer(String location) {
-//        super();
-//        this.location = location;
-//    }
     @OneToMany
     @JoinColumn(name = "employer_id")
 //    @OneToMany(mappedBy = "employer")
     private final List<Job> jobs = new ArrayList<>();
-
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "post_id")
-//    private List<PostComment> comments = new ArrayList<>();
 
     public Employer() {}
 
@@ -41,11 +33,5 @@ public class Employer extends AbstractEntity {
     public List<Job> getJobs() {
         return jobs;
     }
-
-//    @Override
-//    public String toString() {
-//        return name;
-//    }
-
 
 }

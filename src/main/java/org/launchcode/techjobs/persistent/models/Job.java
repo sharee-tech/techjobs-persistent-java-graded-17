@@ -9,16 +9,8 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue
-//    private int id;
-
-//    private String name;
     @ManyToOne
     private Employer employer;
-
-//    @ManyToMany(mappedBy = "jobs")
-//    private String skills;
 
     @ManyToMany
     private List<Skill> skills = new ArrayList<>();
@@ -35,14 +27,6 @@ public class Job extends AbstractEntity {
     }
 
     // Getters and setters.
-    
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     public Employer getEmployer() {
         return employer;
